@@ -1,0 +1,48 @@
+main {
+    text-align: center;
+    font-family: 'Open Sans Condensed', sans-serif;
+    letter-spacing: 2px;
+}
+
+#container {
+    display: flex;
+    justify-content: space-around;
+    font-family: 'Open Sans Condensed', sans-serif;
+    background-color: navy;
+    width: 100%;
+    color: oldlace;
+}
+
+#timer {
+   
+}
+
+#score {
+   
+}
+
+h1, h2 {
+    font-size: 300%;
+}
+
+h2 {
+    margin: 1% 0%;
+}
+
+
+h3 {
+   font-size: 200%;
+   line-height: 150%;
+   margin: 1% 0%;
+}
+
+#startBtn {
+    font-size: 150%;
+    padding: .3% 3%;
+}
+
+img {
+    max-width: 50%;
+    margin-top: .5%;
+}
+
