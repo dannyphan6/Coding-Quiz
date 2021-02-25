@@ -29,7 +29,6 @@ var currentQuestion = 0;
 
 function startGame() {
     timerCount = 60;
-    footballLogo.disabled = false;
     startBtn.disabled = false;
     startTimer();
 }
@@ -37,13 +36,34 @@ function startGame() {
 function startTimer() {
     timer = setInterval(function() {
         timerCount--;
-        timerElement.textContent = timerCount + " seconds";
+        timerElement.textContent = "Timer: " + timerCount + " seconds";
     }, 1000);
+}
+
+function setScore
+
+function getArray() {
+
+}
+
+function getCorrect () {
+
+}
+
+function getWrong () {
+
+}
+
+function gameOver() {
+
+}
+
+function saveHighScore() {
+
 }
 
 
 
 
 
-
-startBtn.addEventListener("click", startGame)
+startBtn.onclick = startGame
