@@ -11,20 +11,26 @@
 </head>
 <body>
     <main>
-        <section>
-            <div id="container">
-                <h1 id="timer">Timer:</h1>
-                <h1 id="score">Score:</h1>
-            </div>
-            
-            <h2>Welcome to a Football Quiz!</h2>
-            <img id="NFL" src="https://i.pinimg.com/originals/a7/d1/3d/a7d13d5656de499952ea6620f98aa74d.png" alt="All 32 NFL Teams">
+        <div id="container">
+            <h1 id="timer">Timer:</h1>
+            <h1 id="score">Score:</h1>
+        </div>
+        <section id="section">
+            <h2>Welcome to a JavaScript Quiz!</h2>
+            <img id="javascript" src="https://miro.medium.com/max/8544/0*ok51b2bP1XoBNDbs" alt="JavaScript">
             <h3>
-                How would you rate your knowledge of Football?<br> 
+                How would you rate your knowledge of JavaScript?<br> 
                 Well, let's find out! Press 'Start' to begin 
             </h3>
             <button id="startBtn">Start</button>
         </section>
+        <div id="questions" class="invisible">
+            <h2 class="title"></h2>
+            <div class="choices">
+
+            </div>
+        </div>
+        <div id="highscores" class="show"></div>
     </main>
     <script src="script.js"></script>
 </body>

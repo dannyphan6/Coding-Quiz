@@ -1,64 +1,113 @@
 var startBtn = document.querySelector("#startBtn");
 var timerElement = document.querySelector("#timer");
 var scoreElement = document.querySelector("#score");
-var footballLogo = document.querySelector("NFL");
+var jsImage = document.querySelector("#javascript");
+var section = document.querySelector("#section");
+var showQuestions = document.querySelector("#questions")
+var title = document.querySelector(".title");
+var choices = document.querySelector(".choices");
+var highScore = document.querySelector("#highscores");
 
-var footballQuestions = [{
-    Question: "Who was the first team in the NFL to go 0-16?",
-    Choices: ["Detroit Lions", "New York Jets", "Cleveland Browns", "St. Louis Rams"],
-    Answer: "Detroit Lions"
+var jsQuestions = [{
+    Question: "What are the types of pop up boxes that are available in JavaScript?",
+    Choices: ["Alert", "Confirm", "Prompt", "All the above"],
+    Answer: "All the above"
 },
 {
-    Question: "In the season 2019-2020, who is currently the oldest NFL coach?",
-    Choices: ["Bill Belichick", "Bruce Arians", "Mike Zimmer", "Pete Carroll"],
-    Answer: "Pete Carroll"
+    Question: "The condition in an if/else statement is enclosed within ____?",
+    Choices: ["Quotes", "Curly Braces", "Square Brackets", "Parentheses"],
+    Answer: "Parentheses"
 },
 {
-    Question: "In 2001, what team drafted Drew Brees and in what round?",
-    Choices: ["New Orlean Saints, 1st Round", "Indianapolis Colts, 3th Round", "San Diego Chargers, 2nd Round", "Atlanta Falcons, 1st Round"],
-    Answer: "San Diego Chargers, 2nd Round"
+    Question: "A very useful function used for debugging in JavaScript is called ____",
+    Choices: ["localStorage", "getAttribute", "console.log", "setItems"],
+    Answer: "console.log"
 }]
 
-console.log(footballQuestions);
+console.log(jsQuestions);
 
 var timer;
 var timerCount; 
-var keepingScore = 0;
+var score = 0;
 var currentQuestion = 0;
 
 
 function startGame() {
     timerCount = 60;
-    startBtn.disabled = false;
+    // Setting an attribute class of hide that hides the whole 'section' once game starts
+    section.setAttribute("class", "hide")
+    // Removing the attribute class of hide to display questions after section is hidden
+    showQuestions.removeAttribute("class", "hide")
     startTimer();
+    setScore();
+    nextQuestion();
 }
 
 function startTimer() {
+    clearInterval(timer);
     timer = setInterval(function() {
         timerCount--;
         timerElement.textContent = "Timer: " + timerCount + " seconds";
+        if (timerCount <= 0) {
+            clearInterval(timer);
+        }
     }, 1000);
+    
 }
 
-function setScore
+function setScore() {
+    scoreElement.textContent = "Score: " + score;
+}
 
-function getArray() {
+function nextQuestion() {
+    // The array jsQuestions is stored in the variable 
+    var allQuestions = jsQuestions[currentQuestion];
+
+    title.textContent = allQuestions.Question
+
+    choices.innerHTML = ""
+
+    for(i = 0; i < allQuestions.Choices.length; i++) {
+        var choiceBtn = document.createElement("button");
+        choiceBtn.setAttribute("value", allQuestions.Choices[i])
+        choiceBtn.textContent = allQuestions.Choices[i]
+        choiceBtn.onclick = answerCorrect
+        choices.appendChild(choiceBtn)
+    }
+}
+
+function answerCorrect () {
+    console.log(this.value)
+
+    if (this.value !== jsQuestions[currentQuestion].Answer) {
+        timerCount -= 10;
+    } else if (this.value === jsQuestions[currentQuestion].Answer) {
+        score += 20;
+        scoreElement.textContent = "Score: " + score
+    }
+    currentQuestion++;
+    if(currentQuestion === jsQuestions.length) {
+        gameOver();
+    } else {
+        nextQuestion();
+    }
 
 }
 
-function getCorrect () {
+function gameOver () {
+    showQuestions.setAttribute("class", "show");
+    highScore.removeAttribute("class", "hide");
+}
+
+function resetGame() {
+    clearInterval(timer);
+    score = 0;
+    currentQuestion = 0;
+
 
 }
 
-function getWrong () {
-
-}
-
-function gameOver() {
-
-}
-
-function saveHighScore() {
+function saveScore() {
 
 }
 
