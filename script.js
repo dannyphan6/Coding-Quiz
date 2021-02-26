@@ -2,11 +2,13 @@ var startBtn = document.querySelector("#startBtn");
 var timerElement = document.querySelector("#timer");
 var scoreElement = document.querySelector("#score");
 var jsImage = document.querySelector("#javascript");
-var section = document.querySelector("#section");
+var sectionEl = document.querySelector("#section");
 var showQuestions = document.querySelector("#questions")
-var title = document.querySelector(".title");
-var choices = document.querySelector(".choices");
+var titleEl = document.querySelector(".title");
+var choicesEl = document.querySelector(".choices");
 var highScore = document.querySelector("#highscores");
+var gameOverEl = document.querySelector("#gameover");
+
 
 var jsQuestions = [{
     Question: "What are the types of pop up boxes that are available in JavaScript?",
@@ -35,7 +37,7 @@ var currentQuestion = 0;
 function startGame() {
     timerCount = 60;
     // Setting an attribute class of hide that hides the whole 'section' once game starts
-    section.setAttribute("class", "hide")
+    sectionEl.setAttribute("class", "hide")
     // Removing the attribute class of hide to display questions after section is hidden
     showQuestions.removeAttribute("class", "hide")
     startTimer();
@@ -63,28 +65,41 @@ function nextQuestion() {
     // The array jsQuestions is stored in the variable 
     var allQuestions = jsQuestions[currentQuestion];
 
-    title.textContent = allQuestions.Question
+    // Targets the class title in HTML and displays the question from allQuestions
+    titleEl.textContent = allQuestions.Question
 
-    choices.innerHTML = ""
+    // Clears the string of choices when the next question appears
+    // innerHTML is used here because it's clearing everything including the values, text inside button, and etc 
+    choicesEl.innerHTML = ""
 
+    // for loop that creates a button for each choice in allQuestions
     for(i = 0; i < allQuestions.Choices.length; i++) {
         var choiceBtn = document.createElement("button");
+        // Sets an attribute of value to each of the choices
         choiceBtn.setAttribute("value", allQuestions.Choices[i])
+        // Displays the choices inside of the element button created on line 74
         choiceBtn.textContent = allQuestions.Choices[i]
+        // When user clicks on a button, then execute function answerCorrect, which will analyze whether the choice is correct or false
         choiceBtn.onclick = answerCorrect
-        choices.appendChild(choiceBtn)
+        // targets the class choices in HTML and adds all the buttons + content to that div 
+        choicesEl.appendChild(choiceBtn)
     }
 }
 
 function answerCorrect () {
+    // This will grab the value from whatever the user selects
     console.log(this.value)
 
+    // This says that if the value the user selects, isn't equal to the 'Answer' then subtract 10 seconds
     if (this.value !== jsQuestions[currentQuestion].Answer) {
         timerCount -= 10;
+    // If the value the user selects IS equal to the 'Answer' then add 20 points and display the score
     } else if (this.value === jsQuestions[currentQuestion].Answer) {
         score += 20;
         scoreElement.textContent = "Score: " + score
     }
+    // If currentQuestion is equal to the length of how many questions are in jsQuestions, then end the game
+    // If it doesn't equal jsQuestions.length, then continue and execute nextQuestion
     currentQuestion++;
     if(currentQuestion === jsQuestions.length) {
         gameOver();
@@ -95,8 +110,14 @@ function answerCorrect () {
 }
 
 function gameOver () {
-    showQuestions.setAttribute("class", "show");
-    highScore.removeAttribute("class", "hide");
+    clearInterval(timer);
+
+    
+    showQuestions.setAttribute("class", "hide");
+    highScore.removeAttribute("class", "show");
+    var highScore = document.createElement("h3")
+    highScore.textContent = "You scored " + score
+  
 }
 
 function resetGame() {
