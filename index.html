@@ -24,12 +24,23 @@
             </h2>
             <button id="startBtn">Start</button>
         </section>
-        <div id="questions" class="invisible">
+        <div id="questions" class="hide">
             <h2 class="title"></h2>
             <div class="choices"></div>
         </div>
         <div id="gameover" class="show"></div> 
-        <div id="highscores" class="show"></div>
+        <div id="currentscores" class="show"></div>
+        <label for="name" id="text"></label>
+        <div id="results" class="hide">
+            <h3 id="h3">Enter Name:
+                <input type="text" id="name" name="name" class="hide show" required minlength="100" maxlength="80" size="10">
+                <button id="submit">Submit</button>
+            </h3>
+        </div>
+        <button id="reset" class="hide">Reset</button>
+        <div id="highscore">
+
+        </div>
     </main>
     <script src="script.js"></script>
 </body>

@@ -6,8 +6,13 @@ var sectionEl = document.querySelector("#section");
 var showQuestions = document.querySelector("#questions")
 var titleEl = document.querySelector(".title");
 var choicesEl = document.querySelector(".choices");
-var highScore = document.querySelector("#highscores");
+var currentScore = document.querySelector("#currentscores");
 var gameOverEl = document.querySelector("#gameover");
+var enterName = document.querySelector("#name");
+var formText = document.querySelector("#text");
+var submitBtn = document.querySelector("#submit");
+var resetBtn = document.querySelector("#reset")
+var endResults = document.querySelector("#results");
 
 
 var jsQuestions = [{
@@ -64,7 +69,6 @@ function startTimer() {
             clearInterval(timer);
         }
     }, 1000);
-    
 }
 
 function setScore() {
@@ -87,6 +91,7 @@ function nextQuestion() {
         var choiceBtn = document.createElement("button");
         // Sets an attribute of value to each of the choices
         choiceBtn.setAttribute("value", allQuestions.Choices[i]);
+        choiceBtn.setAttribute("class", "btn")
         // Displays the choices inside of the element button created on line 74
         choiceBtn.textContent = allQuestions.Choices[i];
         // When user clicks on a button, then execute function answerCorrect, which will analyze whether the choice is correct or false
@@ -99,7 +104,6 @@ function nextQuestion() {
 function answerCorrect () {
     // This will grab the value from whatever the user selects
     console.log(this.value);
-
     // This says that if the value the user selects, isn't equal to the 'Answer' then subtract 10 seconds
     if (this.value !== jsQuestions[currentQuestion].Answer) {
         timerCount -= 10;
@@ -121,28 +125,34 @@ function answerCorrect () {
 function gameOver () {
     clearInterval(timer);
 
-    
     showQuestions.setAttribute("class", "hide");
-    highScore.removeAttribute("class", "show");
+    currentScore.removeAttribute("class", "show");
+    
     var finalScore = document.createElement("h2");
     finalScore.textContent = "You scored " + score + "/100";
-    highScore.append(finalScore);
+    currentScore.append(finalScore);
+
+    endResults.removeAttribute("class", "hide")
 }
 
 function resetGame() {
     clearInterval(timer);
     score = 0;
     currentQuestion = 0;
+    timerCount = 60;
+    
+    // window.location.href look into this later 
+    // Put high scores into an object and use setItem in localStorage 
 
 
 }
 
 function saveScore() {
-
+    endResults.setAttribute("class", "hide")
 }
 
 
 
-
-
+resetBtn.onclick = resetGame
+submitBtn.onclick = saveScore
 startBtn.onclick = startGame

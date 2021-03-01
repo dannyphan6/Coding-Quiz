@@ -13,14 +13,6 @@ main {
     color: oldlace;
 }
 
-#timer {
-   
-}
-
-#score {
-   
-}
-
 h1, h2 {
     font-size: 300%;
 }
@@ -29,16 +21,71 @@ h2 {
     margin: 1% 0%;
 }
 
-
 h3 {
    font-size: 200%;
    line-height: 150%;
    margin: 1% 0%;
 }
 
+#h3 {
+    font-size: 150%;
+    margin: 0 auto;
+}
+
 #startBtn {
     font-size: 150%;
     padding: .3% 3%;
+    color: oldlace;
+    background-color: rgb(48, 117, 134);
+}
+
+#startBtn:hover {
+    box-shadow: 5px 10px 18px #8888;
+    text-decoration: underline;
+}
+
+.btn {
+    margin: 0% .7%;
+    padding: .5%;
+    font-size: 150%;
+    margin-top: 2%;
+    color: oldlace;
+    background-color: rgb(48, 117, 134);
+}
+
+.btn:hover {
+    box-shadow: 5px 10px 18px #8888;
+    text-decoration: underline;
+}
+
+#submit {
+    color: oldlace;
+    background-color: rgb(48, 117, 134);
+    padding: .42% 2%;
+    margin-left: .5%;
+    margin-bottom: .05%;
+}
+
+#submit:hover {
+    box-shadow: 5px 10px 18px #8888;
+    text-decoration: underline;
+}
+
+input {
+    height: 25px;
+    width: 150px;
+    text-align: center;
+}
+
+#reset {
+    color: oldlace;
+    background-color: rgb(48, 117, 134);
+    padding: .42% 2%;
+}
+
+#reset:hover {
+    box-shadow: 5px 10px 18px #8888;
+    text-decoration: underline;
 }
 
 img {
