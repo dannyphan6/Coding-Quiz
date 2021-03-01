@@ -56,6 +56,7 @@ function startGame() {
     sectionEl.setAttribute("class", "hide");
     // Removing the attribute class of hide to display questions after section is hidden
     showQuestions.removeAttribute("class", "hide");
+    endResults.setAttribute("class", "hide")
     startTimer();
     setScore();
     nextQuestion();
