@@ -11,7 +11,8 @@ var gameOverEl = document.querySelector("#gameover");
 var enterName = document.querySelector("#name");
 var formText = document.querySelector("#text");
 var submitBtn = document.querySelector("#submit");
-var resetBtn = document.querySelector("#reset")
+var highScore = document.querySelector("#highscore");
+var resetBtn = document.querySelector("#reset");
 var endResults = document.querySelector("#results");
 
 
@@ -148,6 +149,7 @@ function resetGame() {
 }
 
 function saveScore() {
+    
     endResults.setAttribute("class", "hide")
 }
 

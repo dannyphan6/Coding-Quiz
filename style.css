@@ -74,9 +74,15 @@ h3 {
 input {
     height: 25px;
     width: 150px;
-    text-align: center;
 }
 
+#results {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    width: 50%;
+}
 #reset {
     color: oldlace;
     background-color: rgb(48, 117, 134);
