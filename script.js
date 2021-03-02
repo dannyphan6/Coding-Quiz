@@ -14,6 +14,7 @@ var submitBtn = document.querySelector("#submit");
 var highScore = document.querySelector("#highscore");
 var resetBtn = document.querySelector("#reset");
 var endResults = document.querySelector("#results");
+var appendScore = document.querySelector("#listitems");
 
 var jsQuestions = [{
     Question: "What are the types of pop up boxes that are available in JavaScript?",
@@ -135,6 +136,13 @@ function gameOver() {
     endResults.setAttribute("style", "display:flex");
     highScore.removeAttribute("class", "hide");
     resetBtn.removeAttribute("class", "hide");
+
+    var endScore = JSON.parse(window.localStorage.getItem("High Scores")) || [];
+    for (var i=0; i < endScore.length; i++) {
+        var highscoreListEl = document.createElement("li")
+        highscoreListEl.textContent = "Name: " + endScore[i].initials + "Score: " + endScore[i].scores;
+        appendScore.append(highscoreListEl);
+    }
 }
 
 function resetGame() {
@@ -144,16 +152,22 @@ function resetGame() {
 
 function saveScore() {
     var userInitials = enterName.value.trim();
-    var userScore = score.value;
+    var userScore = score;
+    console.log(score)
     var objects = {
         initials: userInitials,
         scores: userScore
     };
-    var endScore = JSON.parse(window.localStorage.getItem("High Scores"));
+    console.log(objects)
+    // This is looking in localStorage for values under High Scores. If not found, an empty array is stored in endScore
+    var endScore = JSON.parse(window.localStorage.getItem("High Scores")) || [];
+    // Since there's no value in High Scores, then push user input from 'objects' into the variable endScore
     endScore.push(objects);
+    // Takes the object in endScore and turns them into a string
     window.localStorage.setItem("High Scores", JSON.stringify(endScore));
 }
 
 resetBtn.onclick = resetGame;
 submitBtn.onclick = saveScore;
 startBtn.onclick = startGame;
+
