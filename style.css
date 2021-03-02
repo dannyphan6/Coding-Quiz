@@ -78,10 +78,11 @@ input {
 }
 
 #results {
-    display: flex;
+    /* display: none; */
     justify-content: center;
     align-items: center;
 }
+
 #reset {
     color: oldlace;
     background-color: rgb(48, 117, 134);
@@ -104,7 +105,7 @@ ul {
 }
 
 .hide {
-    display: none;
+    display: none; 
 }
 
 .show {

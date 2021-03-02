@@ -15,7 +15,6 @@ var highScore = document.querySelector("#highscore");
 var resetBtn = document.querySelector("#reset");
 var endResults = document.querySelector("#results");
 
-
 var jsQuestions = [{
     Question: "What are the types of pop up boxes that are available in JavaScript?",
     Choices: ["Alert", "Confirm", "Prompt", "All the above"],
@@ -45,7 +44,7 @@ var jsQuestions = [{
 console.log(jsQuestions);
 
 var timer;
-var timerCount; 
+var timerCount;
 var score = 0;
 var currentQuestion = 0;
 
@@ -56,7 +55,6 @@ function startGame() {
     sectionEl.setAttribute("class", "hide");
     // Removing the attribute class of hide to display questions after section is hidden
     showQuestions.removeAttribute("class", "hide");
-    
     startTimer();
     setScore();
     nextQuestion();
@@ -64,7 +62,7 @@ function startGame() {
 
 function startTimer() {
     clearInterval(timer);
-    timer = setInterval(function() {
+    timer = setInterval(function () {
         timerCount--;
         timerElement.textContent = "Timer: " + timerCount + " seconds";
         if (timerCount <= 0) {
@@ -89,11 +87,11 @@ function nextQuestion() {
     choicesEl.innerHTML = "";
 
     // for loop that creates a button for each choice in allQuestions
-    for(i = 0; i < allQuestions.Choices.length; i++) {
+    for (i = 0; i < allQuestions.Choices.length; i++) {
         var choiceBtn = document.createElement("button");
         // Sets an attribute of value to each of the choices
         choiceBtn.setAttribute("value", allQuestions.Choices[i]);
-        choiceBtn.setAttribute("class", "btn")
+        choiceBtn.setAttribute("class", "btn");
         // Displays the choices inside of the element button created on line 74
         choiceBtn.textContent = allQuestions.Choices[i];
         // When user clicks on a button, then execute function answerCorrect, which will analyze whether the choice is correct or false
@@ -103,13 +101,13 @@ function nextQuestion() {
     }
 }
 
-function answerCorrect () {
+function answerCorrect() {
     // This will grab the value from whatever the user selects
     console.log(this.value);
     // This says that if the value the user selects, isn't equal to the 'Answer' then subtract 10 seconds
     if (this.value !== jsQuestions[currentQuestion].Answer) {
         timerCount -= 10;
-    // If the value the user selects IS equal to the 'Answer' then add 20 points and display the score
+        // If the value the user selects IS equal to the 'Answer' then add 20 points and display the score
     } else if (this.value === jsQuestions[currentQuestion].Answer) {
         score += 20;
         scoreElement.textContent = "Score: " + score + "/100";
@@ -117,24 +115,24 @@ function answerCorrect () {
     // If currentQuestion is equal to the length of how many questions are in jsQuestions, then end the game
     // If it doesn't equal jsQuestions.length, then continue and execute nextQuestion
     currentQuestion++;
-    if(currentQuestion === jsQuestions.length) {
+    if (currentQuestion === jsQuestions.length) {
         gameOver();
     } else {
         nextQuestion();
     }
 }
 
-function gameOver () {
+function gameOver() {
     clearInterval(timer);
 
     showQuestions.setAttribute("class", "hide");
     currentScore.removeAttribute("class", "show");
-    
+
     var finalScore = document.createElement("h2");
     finalScore.textContent = "You scored " + score + "/100";
     currentScore.append(finalScore);
 
-    endResults.removeAttribute("class", "hide");
+    endResults.setAttribute("style", "display:flex");
     highScore.removeAttribute("class", "hide");
     resetBtn.removeAttribute("class", "hide");
 }
@@ -145,12 +143,17 @@ function resetGame() {
 }
 
 function saveScore() {
-    
-    // endResults.setAttribute("class", "hide")
+    var userInitials = enterName.value.trim();
+    var userScore = score.value;
+    var objects = {
+        initials: userInitials,
+        scores: userScore
+    };
+    var endScore = JSON.parse(window.localStorage.getItem("High Scores"));
+    endScore.push(objects);
+    window.localStorage.setItem("High Scores", JSON.stringify(endScore));
 }
 
-
-
-resetBtn.onclick = resetGame
-submitBtn.onclick = saveScore
-startBtn.onclick = startGame
+resetBtn.onclick = resetGame;
+submitBtn.onclick = saveScore;
+startBtn.onclick = startGame;
