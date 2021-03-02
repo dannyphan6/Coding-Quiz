@@ -29,7 +29,7 @@ h3 {
 }
 
 #h3 {
-    font-size: 150%;
+    font-size: 200%;
     margin: 20px;
 }
 
@@ -62,8 +62,8 @@ h3 {
 #submit {
     color: oldlace;
     background-color: rgb(48, 117, 134);
-    padding: .36% 2%;
-    margin-left: .5%;
+    padding: .32% 2%;
+    margin-left: 1.25%;
     margin-bottom: .05%;
 }
 
@@ -96,6 +96,11 @@ input {
 img {
     max-width: 35%;
     margin-top: .5%;
+}
+
+ul {
+    display: grid;
+    justify-content: center;
 }
 
 .hide {

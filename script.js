@@ -56,7 +56,7 @@ function startGame() {
     sectionEl.setAttribute("class", "hide");
     // Removing the attribute class of hide to display questions after section is hidden
     showQuestions.removeAttribute("class", "hide");
-    endResults.setAttribute("class", "hide")
+    
     startTimer();
     setScore();
     nextQuestion();
@@ -134,24 +134,19 @@ function gameOver () {
     finalScore.textContent = "You scored " + score + "/100";
     currentScore.append(finalScore);
 
-    endResults.removeAttribute("class", "hide")
+    endResults.removeAttribute("class", "hide");
+    highScore.removeAttribute("class", "hide");
+    resetBtn.removeAttribute("class", "hide");
 }
 
 function resetGame() {
-    clearInterval(timer);
-    score = 0;
-    currentQuestion = 0;
-    timerCount = 60;
-    
-    // window.location.href look into this later 
-    // Put high scores into an object and use setItem in localStorage 
-
-
+    event.preventDefault();
+    window.location.reload();
 }
 
 function saveScore() {
     
-    endResults.setAttribute("class", "hide")
+    // endResults.setAttribute("class", "hide")
 }
 
 

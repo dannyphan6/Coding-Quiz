@@ -31,13 +31,12 @@
         <div id="gameover" class="show"></div> 
         <div id="currentscores" class="show"></div>
         <label for="name" id="text"></label>
-        <div id="results" class="show">
+        <div id="results" class="hide">
             <h3 id="h3">Enter Name:</h3>
             <input type="text" id="name" name="name" class="hide show" required minlength="100" maxlength="80" size="10">
             <button id="submit">Submit</button>
         </div>
-        <div id="highscore">
-            <button id="reset" class="hide">Reset</button>
+        <div id="highscore" class="hide">
             <ul>
                 <li></li>
                 <li></li>
@@ -45,6 +44,7 @@
                 <li></li>
                 <li></li>
             </ul>
+            <button id="reset" class="hide">Restart</button>
         </div>
     </main>
     <script src="script.js"></script>
