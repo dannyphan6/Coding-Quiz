@@ -1,7 +1,6 @@
 var startBtn = document.querySelector("#startBtn");
 var timerElement = document.querySelector("#timer");
 var scoreElement = document.querySelector("#score");
-var jsImage = document.querySelector("#javascript");
 var sectionEl = document.querySelector("#section");
 var showQuestions = document.querySelector("#questions")
 var titleEl = document.querySelector(".title");
@@ -9,12 +8,11 @@ var choicesEl = document.querySelector(".choices");
 var currentScore = document.querySelector("#currentscores");
 var gameOverEl = document.querySelector("#gameover");
 var enterName = document.querySelector("#name");
-var formText = document.querySelector("#text");
 var submitBtn = document.querySelector("#submit");
 var highScore = document.querySelector("#highscore");
 var resetBtn = document.querySelector("#reset");
 var endResults = document.querySelector("#results");
-var appendScore = document.querySelector("#listitems");
+var renderScore = document.querySelector("#listitems");
 
 var jsQuestions = [{
     Question: "What are the types of pop up boxes that are available in JavaScript?",
@@ -49,12 +47,13 @@ var timerCount;
 var score = 0;
 var currentQuestion = 0;
 
-
 function startGame() {
     timerCount = 60;
     // Setting an attribute class of hide that hides the whole 'section' once game starts
+
     sectionEl.setAttribute("class", "hide");
     // Removing the attribute class of hide to display questions after section is hidden
+
     showQuestions.removeAttribute("class", "hide");
     startTimer();
     setScore();
@@ -68,6 +67,7 @@ function startTimer() {
         timerElement.textContent = "Timer: " + timerCount + " seconds";
         if (timerCount <= 0) {
             clearInterval(timer);
+            gameOver();
         }
     }, 1000);
 }
@@ -105,6 +105,7 @@ function nextQuestion() {
 function answerCorrect() {
     // This will grab the value from whatever the user selects
     console.log(this.value);
+
     // This says that if the value the user selects, isn't equal to the 'Answer' then subtract 10 seconds
     if (this.value !== jsQuestions[currentQuestion].Answer) {
         timerCount -= 10;
@@ -113,9 +114,11 @@ function answerCorrect() {
         score += 20;
         scoreElement.textContent = "Score: " + score + "/100";
     }
-    // If currentQuestion is equal to the length of how many questions are in jsQuestions, then end the game
+
     // If it doesn't equal jsQuestions.length, then continue and execute nextQuestion
     currentQuestion++;
+
+    // If currentQuestion is equal to the length of how many questions are in jsQuestions, then end the game
     if (currentQuestion === jsQuestions.length) {
         gameOver();
     } else {
@@ -127,7 +130,7 @@ function gameOver() {
     clearInterval(timer);
 
     showQuestions.setAttribute("class", "hide");
-    currentScore.removeAttribute("class", "show");
+    currentScore.removeAttribute("class", "hide");
 
     var finalScore = document.createElement("h2");
     finalScore.textContent = "You scored " + score + "/100";
@@ -136,16 +139,24 @@ function gameOver() {
     endResults.setAttribute("style", "display:flex");
     highScore.removeAttribute("class", "hide");
     resetBtn.removeAttribute("class", "hide");
+}
 
+function generateScore() {
     var endScore = JSON.parse(window.localStorage.getItem("High Scores")) || [];
+    renderScore.innerHTML = "";
+
+    // for loop is looping through the number of scores stored in localStorage
     for (var i=0; i < endScore.length; i++) {
-        var highscoreListEl = document.createElement("li")
-        highscoreListEl.textContent = "Name: " + endScore[i].initials + "Score: " + endScore[i].scores;
-        appendScore.append(highscoreListEl);
+        var listScore = document.createElement("li")
+        listScore.setAttribute("class", "list-score")
+        listScore.textContent = "Name: " + endScore[i].initials + " Score: " + endScore[i].scores;
+
+        // The listScore.textContent is being appended to renderScore, which will display on the webpage
+        renderScore.append(listScore);
     }
 }
 
-function resetGame() {
+function resetGame(event) {
     event.preventDefault();
     window.location.reload();
 }
@@ -158,16 +169,22 @@ function saveScore() {
         initials: userInitials,
         scores: userScore
     };
-    console.log(objects)
     // This is looking in localStorage for values under High Scores. If not found, an empty array is stored in endScore
+    console.log(objects)
     var endScore = JSON.parse(window.localStorage.getItem("High Scores")) || [];
-    // Since there's no value in High Scores, then push user input from 'objects' into the variable endScore
+    
+    // Since endScore is now an array then we can push user input from 'objects' into the variable endScore
     endScore.push(objects);
+   
     // Takes the object in endScore and turns them into a string
     window.localStorage.setItem("High Scores", JSON.stringify(endScore));
 }
 
-resetBtn.onclick = resetGame;
-submitBtn.onclick = saveScore;
-startBtn.onclick = startGame;
+submitBtn.addEventListener("click", function(event) {
+    event.preventDefault();
+    saveScore();
+    generateScore();
+});
+resetBtn.addEventListener("click", resetGame);
+startBtn.addEventListener("click", startGame);
 
